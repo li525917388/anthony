@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>layui——layer插件</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="../css/layui.css"/>
+</head>
+<body>
+	
+	<button class="layui-btn layui-btn-normal" onclick="open1()">layer入门</button>
+	<button class="layui-btn layui-btn-normal" onclick="open2()">弹出页面层(文本)</button>
+	<button class="layui-btn layui-btn-normal" onclick="open3()">弹出页面层(DOM)</button>
+	<button class="layui-btn layui-btn-normal" onclick="open1()">layer入门</button>
+	<button class="layui-btn layui-btn-normal" onclick="open1()">layer入门</button>
+	<button class="layui-btn layui-btn-normal" onclick="open1()">layer入门</button>
+	<button class="layui-btn layui-btn-normal" onclick="open1()">layer入门</button>
+	<button class="layui-btn layui-btn-normal" onclick="open1()">layer入门</button>
+	<button class="layui-btn layui-btn-normal" onclick="open1()">layer入门</button>
+	<button class="layui-btn layui-btn-normal" onclick="open1()">layer入门</button>
+	<button class="layui-btn layui-btn-normal" onclick="open1()">layer入门</button>
+	
+	<div id="d1" style="display: none;">你好a </div>
+	
+	<script type="text/javascript" src="../assets/js/jquery-2.0.3.min.js"></script>
+	<script type="text/javascript" src="../assets/js/layui.js"></script>
+	<script type="text/javascript" src="../assets/js/lay/dest/layui.all.js"></script>
+	<script type="text/javascript" src="layer.js"></script>
+	
+	<!--layer作为独立组件使用-->
+	<!--
+	<script type="text/javascript">
+		//引入好layer.js后，直接用即可
+		layer.msg('hello'); 
+	</script>
+	-->
+	
+	<!--在layui中使用layer-->
+	<!--
+	<script type="text/javascript">
+		layui.use('layer', function(){
+	  		var layer = layui.layer;
+	  		layer.msg('hello');
+  		});
+	</script>
+	-->
+	
+	<script type="text/javascript">
+		function open1(){
+			layer.alert("layer入门");
+		}
+		function open2(){
+			layer.open({
+			  type: 1, 
+			  title: '弹出普通文本',
+			  content: '你好' //这里content是一个普通的String
+			});
+		}
+		function open3(){
+			layer.open({
+			  type: 1,
+			  title: '弹出指定DOM',
+			  content: $('#d1') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+			});
+			$('#d1').Style().display = none;
+		}
+		
+	</script>
+	
+
+</body>
+</html>
