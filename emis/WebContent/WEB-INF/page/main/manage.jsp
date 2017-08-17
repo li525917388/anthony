@@ -4,7 +4,9 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-	
+	<head>
+		<title>企业管理信息系统</title>
+	</head>
 		<frameset rows="60,*" cols="*" frameborder="1">
 			<frame name="top" src="top.html"/>
 			<frameset cols="187,*" frameborder="1" >
