@@ -22,55 +22,9 @@
 		<link rel="stylesheet" href="${contextPath}/assets/css/ace.min.css" />
 		<link rel="stylesheet" href="${contextPath}/assets/css/ace-rtl.min.css" />
 		<link rel="stylesheet" href="${contextPath}/assets/css/ace-skins.min.css" />
-		<!-- ace settings handler -->
-	<%-- 	<script src="${contextPath}/assets/js/ace-extra.min.js"></script> --%>
-	</head>
-
-	<body>
-	
-
-					<div class="breadcrumbs" id="breadcrumbs">
-						
-
-						<ul class="breadcrumb">
-							<li>
-								<i class="icon-home home-icon"></i>
-								<a href="index.html">首页</a>
-							</li>
-							<li class="active">
-								<a href="#">考评管理</a>
-							</li>
-							<li class="active">
-								<a href="#">成绩管理</a>
-							</li>
-						</ul>
-						<!-- .breadcrumb -->
-					</div>
-					<!-- /.breadcrumbs -->
-
-					<div class="page-content">
-						<div class="row">
-							<div class="col-xs-12">
-								<table id="grid-table"></table>
-								<div id="grid-pager"></div>
-								<script type="text/javascript">
-									var $path_base = "/";//this will be used in gritter alerts containing images
-								</script>
-							</div><!-- /.col-xs-12 -->
-						</div><!-- /.row -->
-					</div>
-					<!-- /.page-content -->
-				
-			
-	
-		<!-- basic scripts -->
-		<script type="text/javascript">
-			window.jQuery || document.write("<script src='${contextPath}/assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
-		</script>
-
-		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src='${contextPath}/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
-		</script>
+		<script src='${contextPath}/assets/js/jquery-2.0.3.min.js'></script>
+		<script src='${contextPath}/assets/js/jquery.mobile.custom.min.js'></script>
+		<script src="${contextPath}/layer/layer.js"></script>
 		<script src="${contextPath}/assets/js/bootstrap.min.js"></script>
 		<script src="${contextPath}/assets/js/typeahead-bs2.min.js"></script>
 		
@@ -78,99 +32,137 @@
 		<script src="${contextPath}/assets/js/date-time/bootstrap-datepicker.min.js"></script>
 		<script src="${contextPath}/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
 		<script src="${contextPath}/assets/js/jqGrid/i18n/grid.locale-cn.js"></script>
-		<script src="${contextPath}/layer/layer.js"></script>
+</head>
 
-		<!-- ace scripts -->
-		<%-- <script src="${contextPath}/assets/js/ace-elements.min.js"></script>
-		<script src="${contextPath}/assets/js/ace.min.js"></script> --%>
+<body>
+	
 
-		<!-- inline scripts related to this page -->
-		<script type="text/javascript">
+	<div class="breadcrumbs" id="breadcrumbs">
+		<ul class="breadcrumb">
+			<li>
+				<i class="icon-home home-icon"></i>
+				<a href="index.html">首页</a>
+			</li>
+			<li class="active">
+				<a href="#">考评管理</a>
+			</li>
+			<li class="active">
+				<a href="#">成绩管理</a>
+			</li>
+		</ul>
+	</div>
+					<!-- /.breadcrumbs -->
+
+	<div class="page-content">
+		<div class="row">
+			<div class="col-xs-12">
+				<table id="grid-table"></table>
+				<div id="grid-pager"></div>
+				<script type="text/javascript">
+					var $path_base = "/";//this will be used in gritter alerts containing images
+				</script>
+			</div><!-- /.col-xs-12 -->
+		</div><!-- /.row -->
+	</div>
+
+	<script type="text/javascript">
 			
-			function del(){
-				layer.open({
-    		   		type : 2,
-    		   		skin: 'layui-layer-lan', //加上边框
-    		   		area: ['950px', '550px'], //宽高
-    		   		fix: false,
-    		   		title: '成绩详情',
-    		   		content: 'gradedetail.html'
-	    		})
-			}
+		function del(){
+			layer.open({
+    		   	type : 2,
+    		   	skin: 'layui-layer-lan', //加上边框
+    		   	area: ['950px', '550px'], //宽高
+    		   	fix: false,
+    		   	title: '成绩详情',
+    		   	content: 'gradedetail.html'
+	    	})
+		}
 		
+		
+		
+		function addMenu(rid) {
+			layer.open({
+				title: "授权",
+				type : 2,
+				area: ['530px', '550px'], //宽高
+				btn:["保存","取消"],
+				content: "${contextPath}/sys/role/toRoleMenuTree.com?rid="+rid,
+				yes: function(index,layero){
+					var data = $(layero).find("iframe")[0].contentWindow.saveRoleMenu();
+	                if(data){
+	                	fun(data);
+	                }
+				}
+			});
+		}
 
 		
 			
-			jQuery(function($){
-				var grid_selector = "#grid-table";
-				var pager_selector = "#grid-pager";
+		jQuery(function($){
+			var grid_selector = "#grid-table";
+			var pager_selector = "#grid-pager";
 				
-				$(grid_selector).jqGrid({
-					url: "${contextPath}/sys/role/getRoles.com",
-					subGrid : false,
-					datatype: "json",
-					height: 400,
-					colNames:[' ','主键','角色名称','角色编码','创建时间'],
-					colModel:[
-						{name: 'blank',index: '', width: 80,fixed: true,resize: false,
-							formatter:authorityFormatter, //对列进行格式化时设置的函数名或者类型
-							formatoptions:{ //formatoptions,对某些列进行格式化的设置
-								keys:true,
-								//当从服务器端返回的数据中没有id时，将此作为唯一rowid使用只有一个列可以做这项设置。
-								//如果设置多于一个，那么只选取第一个，其他被忽略
+			$(grid_selector).jqGrid({
+				url: "${contextPath}/sys/role/getRoles.com",
+				subGrid : false,
+				datatype: "json",
+				height: 400,
+				colNames:[' ','主键','角色名称','角色编码','创建时间',''],
+				colModel:[
+					{name: 'blank',index: '', width: 80,fixed: true,resize: false,
+						formatter:authorityFormatter, //对列进行格式化时设置的函数名或者类型
+						formatoptions:{ //formatoptions,对某些列进行格式化的设置
+							keys:true,
+							//当从服务器端返回的数据中没有id时，将此作为唯一rowid使用只有一个列可以做这项设置。
+							//如果设置多于一个，那么只选取第一个，其他被忽略
 								
-								delOptions:{recreateForm: true, beforeShowForm:beforeDeleteCallback}
-								//editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
-							}
-						},
-						{name:'id',index:'id',width:100, editable:false, sortable:true},
-						{name:'rname',index:'rname',width:100, editable:true, sortable:true},
-						{name:'rcode',index:'rcode', width:100,editable: true,sortable:false},
-						{name:'createdTime',index:'createdTime', width:100, editable: false,sortable:false}
-					],
-					
-					viewrecords : true,//定义是否要显示总记录数
-					rowNum:10,//在grid上显示记录条数，这个参数是要被传递到后台
-					rowList:[10,20,30],//一个下拉选择框，用来改变显示记录数，当选择时会覆盖rowNum参数传递到后台
-					pager : pager_selector,//定义翻页用的导航栏，必须是有效的html元素。翻页工具栏可以放置在html页面任意位置
-					altRows: true,//设置表格 zebra-striped 值
-					multiselect: true,
-					//multikey: "ctrlKey",
-			        multiboxonly: true,
-			        loadComplete : function() {
-						var table = this;
-						setTimeout(function(){
-							styleCheckbox(table);
-							
-							updateActionIcons(table);
-							updatePagerIcons(table);
-							enableTooltips(table);
-						}, 0);
+							delOptions:{recreateForm: true, beforeShowForm:beforeDeleteCallback}
+							//editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
+						}
 					},
-					editurl: "${contextPath}/sys/role/doOperate.com",//nothing is saved
-					//caption: "jqGrid with inline editing",
-					autowidth: true,
-					gridComplete:function(){ 
-						//在此事件中循环为每一行添加修改和删除链接
-       					var ids=jQuery(grid_selector).jqGrid('getDataIDs'); 
-       					for(var i=0; i<ids.length; i++){
-	       					var id=ids[i]; 
-	       					var rowData = $(grid_selector).jqGrid('getRowData',id);
-	       					var rolno = rowData.id;
-	       					modify ="<a href='#' style='color:#6A5ACD' onclick='Formatter(\""+rolno+"\")' class='btn btn-xs btn-warning'><i class='ace-icon fa fa-flag bigger-120'></i></a>"; //这里的onclick就是调用了上面的javascript函数 Modify(id) 
-	       					jQuery(grid_selector).jqGrid('setRowData', ids[i], { rolno: modify}); 
-       					} 
-      				}
-				});
+					{name:'id',index:'id',width:100, editable:false, sortable:true},
+					{name:'rname',index:'rname',width:100, editable:true, sortable:true},
+					{name:'rcode',index:'rcode', width:100,editable: true,sortable:false},
+					{name:'createdTime',index:'createdTime', width:100, editable: false,sortable:false},
+					{name:'id',index:'id',width:50,align:"center",formatter:function(val,opt,cell){
+
+						return "<div class='ui-pg-div ui-inline-edit'><a title='打分' onclick='addMenu(\""+ cell.id +"\")' style='text-decoration:none;' class='ui-icon ace-icon icon-pencil blue'></ a></div>" ;
+					}}
+				],
+					
+				viewrecords : true,//定义是否要显示总记录数
+				rowNum:10,//在grid上显示记录条数，这个参数是要被传递到后台
+				rowList:[10,20,30],//一个下拉选择框，用来改变显示记录数，当选择时会覆盖rowNum参数传递到后台
+				pager : pager_selector,//定义翻页用的导航栏，必须是有效的html元素。翻页工具栏可以放置在html页面任意位置
+				altRows: true,//设置表格 zebra-striped 值
+				multiselect: true,
+				//multikey: "ctrlKey",
+			    multiboxonly: true,
+			    loadComplete : function() {
+					var table = this;
+					setTimeout(function(){
+						styleCheckbox(table);
+							
+						updateActionIcons(table);
+						updatePagerIcons(table);
+						enableTooltips(table);
+					}, 0);
+				},
+				editurl: "${contextPath}/sys/role/doOperate.com",//nothing is saved
+				//caption: "jqGrid with inline editing",
+				autowidth: true,
+				gridComplete:function(){ 
+					
+      			}
+			});
 				
 				
 				//enable datepicker
-				function pickDate( cellvalue, options, cell ) {
-					setTimeout(function(){
-						$(cell) .find('input[type=text]')
-								.datepicker({format:'yyyy-mm-dd' , autoclose:true}); 
-					}, 0);
-				}
+			function pickDate( cellvalue, options, cell ) {
+				setTimeout(function(){
+					$(cell) .find('input[type=text]').datepicker({format:'yyyy-mm-dd' , autoclose:true}); 
+				}, 0);
+			}
 				function authorityFormatter(cellvalue, options,cell) {
 					var templatediv = "<div class='ui-pg-div ui-inline-edit'>";
 						templatea ="<a title='打分' onclick='score()' style='text-decoration:none;' class='ui-icon ace-icon icon-pencil blue'></ a>"
@@ -242,10 +234,7 @@
 						}
 						,
 						multipleSearch: true,
-						/**
-						multipleGroup:true,
-						showQuery: true
-						*/
+						
 					},
 					{
 						//view record form
@@ -372,6 +361,6 @@
 				
 		});
 	</script>
-	</body>
+</body>
 
 </html>

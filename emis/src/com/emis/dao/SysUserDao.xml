@@ -9,4 +9,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from user where uuser=#{uuser}
 	</select>
 	
+	<!-- 获得用户列表 -->
+	<select id="getUsers" parameterType="java.util.Map" resultType="sysUser">
+		select * 
+		from `user` u 
+		limit #{page},#{rows}
+	</select>
+	
+	<!-- 获得用户总数 -->
+	<select id="getUserTotal" parameterType="java.util.Map" resultType="int">
+		select count(*)  
+		from `user` u 
+		limit #{page},#{rows}
+	</select>
+	
 </mapper>	

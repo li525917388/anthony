@@ -1,5 +1,6 @@
 package com.emis.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,8 @@ import com.emis.dao.SysManageDao;
 import com.emis.service.SysManageService;
 import com.emis.sys.entity.SysMenu;
 import com.emis.sys.entity.SysRole;
+import com.emis.sys.entity.SysRoleMenu;
+import com.emis.sys.entity.SysUserRole;
 
 /**
  * 
@@ -42,12 +45,15 @@ public class SysManageServiceImpl implements SysManageService {
 	 * 获得角色菜单
 	 */
 	@Override
-	public List<SysMenu> getMenus(int pid, int rid) {
+	public List<SysMenu> getMenus(int pid, int uid) {
 		// TODO Auto-generated method stub
 		Map<String, Integer> map = new HashMap<String, Integer>() ;
-		map.put("pid", pid) ;
-		map.put("rid", rid) ;
+		
+		map.put("uid", uid) ;
 
+		if(pid != -1){
+			map.put("pid", pid) ;
+		}
 		return sysManageDao.getMenus(map);
 	}
 
@@ -119,13 +125,109 @@ public class SysManageServiceImpl implements SysManageService {
 	@Override
 	public int saveRole(SysRole role) {
 		// TODO Auto-generated method stub
+		int res = 0 ;
+		
 		if(role.getId() == 0){
-			sysManageDao.addRole(role) ;
+			res = sysManageDao.addRole(role) ;
 		}else{
-			
+			res = sysManageDao.updateRole(role) ;
 		}
 		
-		return 0;
+		return res ;
+	}
+
+
+
+	/*
+	 * (non-Javadoc)获取角色菜单树
+	 * @see com.emis.service.SysManageService#getRoleMenu(int)
+	 */
+	@Override
+	public List<Map<String, Object>> getRoleMenu(int rid) {
+		// TODO Auto-generated method stub
+		return sysManageDao.getRoleMenu(rid);
+	}
+
+
+
+	/*
+	 * 更新权限(non-Javadoc)
+	 * @see com.emis.service.SysManageService#updateRoleMenu(int, java.util.List)
+	 */
+	@Override
+	public int updateRoleMenu(int rid, String[] strs) {
+		// TODO 更新权限
+
+		List<SysRoleMenu> list = new ArrayList<SysRoleMenu>() ;
+		
+		for(String str : strs){
+			SysRoleMenu srm = new SysRoleMenu() ;
+			srm.setRid(rid);
+			srm.setMid(Integer.valueOf(str));
+			
+			list.add(srm) ;
+		}
+		
+		//删除权限
+		sysManageDao.removeRoleMenuByRid(rid) ;
+		
+		//添加权限
+		int res = sysManageDao.addRoleMenuByRid(list) ;
+		
+		return res ;
+	}
+
+
+
+	/*
+	 * 获得用户角色(non-Javadoc)
+	 * @see com.emis.service.SysManageService#getUserRole(int)
+	 */
+	@Override
+	public List<Map<String, Object>> getUserRole(int uid) {
+		// TODO Auto-generated method stub
+		return sysManageDao.getUserRole(uid);
+	}
+
+
+
+	/*
+	 * 更新用户角色(non-Javadoc)
+	 * @see com.emis.service.SysManageService#updateUserRole(int, java.lang.String[])
+	 */
+	@Override
+	public int updateUserRole(int uid, String[] strs) {
+		// TODO 更新用户角色
+		
+		List<SysUserRole> list = new ArrayList<SysUserRole>() ;
+		
+		for(String str : strs){
+			SysUserRole sur = new SysUserRole() ;
+			sur.setRid(Integer.valueOf(str));
+			sur.setUid(uid);
+			
+			list.add(sur) ;
+		}
+		
+		//删除权限
+		sysManageDao.removeUrseRoleByRid(uid) ;
+		
+		//添加权限
+		int res = sysManageDao.addUserRoleByRid(list) ;
+		
+		return res ;
+	}
+
+
+
+	/*
+	 * 获得角色实体(non-Javadoc)
+	 * @see com.emis.service.SysManageService#getRoleEntity(int)
+	 */
+	@Override
+	public SysRole getRoleEntity(int id) {
+		// TODO Auto-generated method stub
+		return sysManageDao.getRoleEntity(id);
 	}
 
 }

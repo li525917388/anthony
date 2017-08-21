@@ -19,18 +19,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 添加菜单 -->
 	<insert id="addMenu" parameterType="sysMenu">
-		insert into menu(mname,mcode,url,pid,createdTime) values(#{mname},#{mcode},#{url},#{pid},#{createdTime})
+		insert into menu(mname,mcode,url,pid,createdTime) values(#{mname},#{mcode},#{url},#{pid},sysDate())
 	</insert>
 	
 	
 	<!-- 获得主菜单 -->
 	<select id="getMenus" parameterType="java.util.Map" resultType="sysMenu">
-		select * 
-		from role_menu rm 
-		left join menu m 
+		select m.* 
+		from  menu m 
+		join role_menu rm 
 		on rm.mid=m.`id`  
-		where m.pid=#{pid} 
-		and rm.rid=#{rid} 
+		join user_role ur 
+		on ur.rid=rm.rid 
+		where ur.uid=#{uid} 
+		<if test="#{pid != null}">
+			and m.pid=#{pid} 
+		</if>
+		
 		order by m.`order`
 	</select>
 	
@@ -44,9 +49,76 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from role
 	</select>
 	
+	<!-- 获得指定角色 -->
+	<select id="getRoleEntity" parameterType="int" resultType="sysRole">
+		select * from role where id=#{id}
+	</select>
+	
 	<!-- 添加角色 -->
 	<insert id="addRole" parameterType="sysRole">
 		insert into role(rname,rcode,createdTime) values(#{rname},#{rcode},sysDate())
 	</insert>
 	
+	<!-- 更新角色 -->
+	<update id="updateRole" parameterType="sysRole">
+		update role set rname=#{rname},rcode=#{rcode} 
+		where id=${id}
+	</update>
+	
+	<!-- 获得角色菜单树 -->
+	<select id="getRoleMenu" parameterType="int" resultType="java.util.Map">
+		select m.* ,rmf.id as rmid    
+		from menu m  
+		left join 
+			(select rm.* 
+			from role_menu rm  
+			where rm.rid = #{rid}) rmf   
+		on m.id = rmf.mid 
+	</select>
+	
+	
+	<!-- 移除权限 -->
+	<delete id="removeRoleMenuByRid" parameterType="int">
+		delete from role_menu where rid=#{rid}
+	</delete>
+	
+	
+	<!-- 添加权限 -->
+	<insert id="addRoleMenuByRid" parameterType="java.util.List">
+		
+		insert into role_menu 
+		values 
+		<foreach collection="list" item="m" index="index" separator=",">
+			(null,#{m.rid},#{m.mid})
+		</foreach>
+		
+	</insert>
+	
+	<!-- 获得用户角色树 -->
+	<select id="getUserRole" parameterType="int" resultType="java.util.Map">
+		select r.* ,urf.id as urid    
+		from role r  
+		left join 
+			(select ur.* 
+			from user_role ur  
+			where ur.uid = #{uid}) urf   
+		on r.id = urf.rid 
+	</select>
+	
+	
+	<!-- 移除权限 -->
+	<delete id="removeUrseRoleByRid" parameterType="int">
+		delete from user_role where uid=#{uid}
+	</delete>
+	
+	
+	<!-- 添加权限 -->
+	<insert id="addUserRoleByRid" parameterType="java.util.List">
+		insert into user_role 
+		values 
+		<foreach collection="list" item="r" index="index" separator=",">
+			(null,#{r.uid},#{r.rid})
+		</foreach>
+		
+	</insert>
 </mapper>	

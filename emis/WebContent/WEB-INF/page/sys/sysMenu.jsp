@@ -129,7 +129,14 @@
 						{name:'url',index:'url', width:100,editable: true,sortable:false},
 						{name:'pid',index:'pid', width:100, editable: true,sortable:false},
 						{name:'order',index:'order', width:100, editable: true,sortable:false},
-						{name:'createdTime',index:'createdTime', width:100, editable: false,sortable:false}
+						{name:'createdTime',index:'createdTime',formatter:function(val,opt,cell){
+							var s = "" ;
+							var h = "" ;
+							var m = "" ;
+							m = val.minutes ;
+							s = val.seconds ;
+							return (val.year+1900)+"-"+(val.month+1)+"-"+val.date+" "+val.hours+":"+ m +":"+ s;
+						}, width:100, editable: false,sortable:false}
 					],
 					
 					viewrecords : true,//定义是否要显示总记录数
