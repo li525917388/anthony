@@ -8,6 +8,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.emis.dao.SysManageDao;
 import com.emis.service.SysManageService;
@@ -21,6 +23,7 @@ import com.emis.sys.entity.SysUserRole;
  * @author Administrator
  *
  */
+@Transactional(readOnly = false)
 @Service
 public class SysManageServiceImpl implements SysManageService {
 
@@ -155,6 +158,7 @@ public class SysManageServiceImpl implements SysManageService {
 	 * @see com.emis.service.SysManageService#updateRoleMenu(int, java.util.List)
 	 */
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public int updateRoleMenu(int rid, String[] strs) {
 		// TODO 更新权限
 
