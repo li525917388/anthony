@@ -1,6 +1,5 @@
 package com.emis.sys.action;
 
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.emis.sys.entity.SysMenu;
 
 @Controller
 @RequestMapping("home")
@@ -26,6 +24,20 @@ public class HomePageAction extends SysSurperAction {
 	public String toAdminManage(HttpServletRequest request, HttpServletResponse response){
 	
 		return "main/manage";
+		
+	}
+	
+	
+	/**
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="toTop", method = { RequestMethod.POST, RequestMethod.GET})
+	public String toTop(HttpServletRequest request, HttpServletResponse response){
+	
+		return "layout/top";
 		
 	}
 	

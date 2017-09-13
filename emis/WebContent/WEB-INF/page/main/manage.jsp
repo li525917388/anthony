@@ -6,11 +6,14 @@
 <html>
 	<head>
 		<title>企业管理信息系统</title>
+		<style type="text/css">
+			
+		</style>
 	</head>
-		<frameset rows="60,*" cols="*" frameborder="1">
-			<frame name="top" src="top.html"/>
-			<frameset cols="187,*" frameborder="1" >
-				<frame name="left" src="${contextPath }/sys/MenuAction/left.com"/>
+		<frameset rows="60,*" cols="*" frameborder="0">
+			<frame name="top" style="border-bottom:1px solid #888; " src="${contextPath }/home/toTop.com"/>
+			<frameset cols="187,*" frameborder="0" >
+				<frame name="left" style="border-right: 1px solid #888;" src="${contextPath }/sys/MenuAction/left.com"/>
 				<frame name="center" src="center.html"/>
 			</frameset>
 		</frameset>	
