@@ -110,7 +110,7 @@
 					subGrid : false,
 					datatype: "json",
 					height: 400,
-					colNames:[' ','主键','菜单名称','菜单编码','菜单路径','上级菜单','顺序','创建时间'],
+					colNames:[' ','主键','菜单名称','菜单编码','菜单路径','图标','上级菜单','顺序','创建时间'],
 					colModel:[
 						{name: 'blank',index: '', width: 80,fixed: true,resize: false,
 							formatter:authorityFormatter, //对列进行格式化时设置的函数名或者类型
@@ -127,6 +127,7 @@
 						{name:'mname',index:'mname',width:100, editable:true, sortable:true},
 						{name:'mcode',index:'mcode', width:100,editable: true,sortable:false},
 						{name:'url',index:'url', width:100,editable: true,sortable:false},
+						{name:'icon',index:'icon', width:100, editable: true,sortable:false},
 						{name:'pid',index:'pid', width:100, editable: true,sortable:false},
 						{name:'order',index:'order', width:100, editable: true,sortable:false},
 						{name:'createdTime',index:'createdTime',formatter:function(val,opt,cell){

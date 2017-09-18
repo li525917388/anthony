@@ -2,8 +2,6 @@ package com.emis.sys.action;
 
 import javax.annotation.Resource;
 
-import org.springframework.stereotype.Controller;
-
 import com.emis.service.SysManageService;
 
 public class SysSurperAction {

@@ -14,11 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.emis.sys.entity.SysMenu;
 import com.emis.sys.entity.SysRole;
 import com.emis.util.JqGridView;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Controller

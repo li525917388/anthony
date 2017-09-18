@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.emis.sys.entity.SysMenu;
-import com.emis.sys.entity.SysRole;
 import com.emis.util.JqGridView;
+import com.emis.util.SimpleUtil;
 
 import net.sf.json.JSONObject;
 
@@ -95,10 +95,13 @@ public class MenuAction extends SysSurperAction {
 	public void doOperate(HttpServletRequest request, HttpServletResponse response) {
 		String oper = request.getParameter("oper") ;
 		
+		String id = request.getParameter("id") ;
 		String mname = request.getParameter("mname") ;		//
 		String mcode = request.getParameter("mcode") ;		//
 		String url = request.getParameter("url") ;		//
 		String pid = request.getParameter("pid") ;	
+		String icon = request.getParameter("icon") ;	
+		String order = request.getParameter("order") ;	
 		
 		SysMenu menu = new SysMenu() ;
 		if("add".equals(oper)){
@@ -108,13 +111,14 @@ public class MenuAction extends SysSurperAction {
 			
 		}
 		
-		//
-		
-		
+		//赋值
+		menu.setIcon(icon);
 		menu.setMcode(mcode);
 		menu.setMname(mname);
 		menu.setPid(Integer.valueOf(pid));
 		menu.setUrl(url);
+		menu.setOrder(SimpleUtil.toInteger(order));
+		
 		sysManageService.saveMenu(menu) ;
 	}
 	

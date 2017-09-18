@@ -53,7 +53,7 @@
 	<ul id="accordion" class="accordion">
 		<c:forEach items="${menuList }" var="ml">
 		<li>
-			<div class="link"><i class="fa fa-paint-brush"></i>${ml.mname }<i class="fa fa-chevron-down"></i></div>
+			<div class="link"><i class="fa ${ml.icon }"></i>${ml.mname }<i class="fa fa-chevron-down"></i></div>
 			<ul class="submenu">
 			<c:forEach items="${ml.cMenus }" var="cms">
 				<li><a onclick="toMenu('${cms.url }')" href="#">${cms.mname }</a></li>
