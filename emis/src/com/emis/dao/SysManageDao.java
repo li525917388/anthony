@@ -7,6 +7,7 @@ import com.emis.sys.entity.SysMenu;
 import com.emis.sys.entity.SysRole;
 import com.emis.sys.entity.SysRoleMenu;
 import com.emis.sys.entity.SysUserRole;
+import com.emis.util.Search;
 
 /**
  * 后台管理数据连接接口
@@ -21,6 +22,13 @@ public interface SysManageDao {
 	 * @return
 	 */
 	public List<SysMenu> getAllMenu(Map<String,Integer> map) ;
+	
+	
+	/**
+	 * 获得全部菜单
+	 * @return
+	 */
+	public List<SysMenu> getAllMenuSearch(Search s) ;
 	
 	
 	

@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<!-- 配置包级别名 -->
  	<typeAliases>
   		<package name="com.emis.sys.entity"/>
+  		<package name="com.emis.util"/>
   	</typeAliases>
 	
 	

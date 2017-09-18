@@ -17,6 +17,7 @@ import com.emis.sys.entity.SysMenu;
 import com.emis.sys.entity.SysRole;
 import com.emis.sys.entity.SysRoleMenu;
 import com.emis.sys.entity.SysUserRole;
+import com.emis.util.Search;
 
 /**
  * 
@@ -39,6 +40,19 @@ public class SysManageServiceImpl implements SysManageService {
 		Map<String, Integer> map = new HashMap<String, Integer>() ;
 		map.put("page", page) ;
 		map.put("rows", rows) ;
+		return sysManageDao.getAllMenu(map);
+	}
+	
+	
+	/**
+	 * 获得全部菜单
+	 */
+	@Override
+	public List<SysMenu> getAllMenu(Search search) {
+		// TODO Auto-generated method stub
+		Map<String, Integer> map = new HashMap<String, Integer>() ;
+		map.put("page", search.getPage()) ;
+		map.put("rows", search.getRows()) ;
 		return sysManageDao.getAllMenu(map);
 	}
 

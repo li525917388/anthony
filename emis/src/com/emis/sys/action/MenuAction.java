@@ -78,7 +78,8 @@ public class MenuAction extends SysSurperAction {
 		int total = sysManageService.getMenuTotal() ;
 		JqGridView<SysMenu> view = new JqGridView<SysMenu>() ;
 		view.setRows(list);
-		view.setMaxResults(total);
+		view.setMaxResults(rows);
+		view.setRecords(total);
 		String json = JSONObject.fromObject(view).toString() ;
 		
 		response.getWriter().print(json);

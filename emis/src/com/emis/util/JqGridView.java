@@ -15,6 +15,8 @@ public class JqGridView<T> {
 	private List<T> rows ;
 	
 	private int records ;
+	
+	private int total ;
 
 	public String getSord() {
 		return sord;
@@ -62,6 +64,19 @@ public class JqGridView<T> {
 
 	public void setRecords(int records) {
 		this.records = records;
+
+		if(this.maxResults != 0){
+			
+			this.total = records % this.maxResults == 0 ? records / this.maxResults : records / this.maxResults + 1 ;
+		}
+	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
 	}
 	
 	

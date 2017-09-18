@@ -17,9 +17,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
+	<!-- 获得全部菜单 -->
+	<select id="getAllMenus" parameterType="search" resultType="sysMenu">
+		select * from menu 
+		<where>
+			<include refid="getMenu_where"/>
+		</where>
+	</select>
+	
+	
+	<sql id="getMenu_where">
+		<foreach collection="filters" close="" item="filter">
+			and menu.${filter.cloum} ${filter.type} #{filter.value}
+		</foreach>
+	</sql>
+	
 	<!-- 添加菜单 -->
 	<insert id="addMenu" parameterType="sysMenu">
-		insert into menu(mname,mcode,url,pid,createdTime) values(#{mname},#{mcode},#{url},#{pid},sysDate())
+		insert into menu(mname,mcode,url,pid,`order`,icon,createdTime) values(#{mname},#{mcode},#{url},#{pid},#{order},#{icon},sysDate())
 	</insert>
 	
 	

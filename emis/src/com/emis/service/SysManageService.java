@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.emis.sys.entity.SysMenu;
 import com.emis.sys.entity.SysRole;
+import com.emis.util.Search;
 
 /**
  * 后台管理业务逻辑接口
@@ -19,6 +20,12 @@ public interface SysManageService {
 	 */
 	public List<SysMenu> getAllMenu(int page,int rows) ;
 	
+	
+	/**
+	 * 获得全部菜单
+	 * @return
+	 */
+	public List<SysMenu> getAllMenu(Search search) ;
 	
 	
 	/**
