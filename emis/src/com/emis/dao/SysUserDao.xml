@@ -23,4 +23,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		limit #{page},#{rows}
 	</select>
 	
+	<!-- 登录 -->
+	<select id="login" parameterType="sysUser" resultType="sysUser">
+		select * from `user` where userName=#{userName}
+	</select>
 </mapper>	

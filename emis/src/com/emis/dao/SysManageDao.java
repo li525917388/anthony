@@ -48,6 +48,24 @@ public interface SysManageDao {
 	public int addMenu(SysMenu menu) ;
 	
 	
+	/**
+	 * 获得菜单实体
+	 * @param mid
+	 * @return
+	 */
+	public SysMenu getMenuEntity(int id);
+	
+	
+	
+	
+	/**
+	 * 更新菜单
+	 * @param menu
+	 * @return
+	 */
+	public int updateMenu(SysMenu menu) ;
+	
+	
 	
 	/**
 	 * 获得角色菜单

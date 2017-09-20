@@ -50,4 +50,26 @@ public class SysUserAction extends SurperAction {
 		
 		response.getWriter().write(json);
 	}
+	
+	
+	/**
+	 * 登录方法
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 */
+	@RequestMapping(value="login", method = { RequestMethod.POST, RequestMethod.GET})
+	public void login(SysUser user,HttpServletRequest request, HttpServletResponse response) throws IOException {
+		System.out.println(user.getUserName());
+		
+		SysUser sysUser = sysUserService.login(user) ;
+		
+		if(sysUser == null){
+			response.getWriter().write("no");
+		}else{
+			request.getSession().setAttribute("SYS_USER", sysUser);
+			
+			response.getWriter().write("suc");
+		}
+	}
 }

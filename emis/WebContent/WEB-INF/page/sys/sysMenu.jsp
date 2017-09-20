@@ -35,13 +35,13 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="index.html">首页</a>
+								<a href="${contextPath}/home/toCenter.com">首页</a>
 							</li>
 							<li class="active">
-								<a href="#">考评管理</a>
+								<a href="#">系统管理</a>
 							</li>
 							<li class="active">
-								<a href="#">成绩管理</a>
+								菜单管理
 							</li>
 						</ul>
 						<!-- .breadcrumb -->
@@ -80,11 +80,6 @@
 		<script src="${contextPath}/assets/js/jqGrid/i18n/grid.locale-cn.js"></script>
 		<script src="${contextPath}/layer/layer.js"></script>
 
-		<!-- ace scripts -->
-		<%-- <script src="${contextPath}/assets/js/ace-elements.min.js"></script>
-		<script src="${contextPath}/assets/js/ace.min.js"></script> --%>
-
-		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
 			
 			function del(){
@@ -207,7 +202,7 @@
 					},
 					{
 						//edit record form
-						//closeAfterEdit: true,
+						closeAfterEdit: true,
 						recreateForm: true,
 						beforeShowForm : function(e) {
 							var form = $(e[0]);

@@ -44,6 +44,21 @@ public class HomePageAction extends SysSurperAction {
 	
 	
 	/**
+	 * 首页
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="toCenter", method = { RequestMethod.POST, RequestMethod.GET})
+	public String toCenter(HttpServletRequest request, HttpServletResponse response){
+	
+		return "layout/center";
+		
+	}
+	
+	
+	
+	/**
 	 * 菜单管理
 	 * @param request
 	 * @param response
@@ -82,5 +97,18 @@ public class HomePageAction extends SysSurperAction {
 	public String toSysUser(HttpServletRequest request, HttpServletResponse response){
 		
 		return "sys/sysUser";
+	}
+	
+	
+	/**
+	 * 合同管理
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="contract", method = { RequestMethod.POST, RequestMethod.GET})
+	public String contract(HttpServletRequest request, HttpServletResponse response){
+		
+		return "contract/contract";
 	}
 }

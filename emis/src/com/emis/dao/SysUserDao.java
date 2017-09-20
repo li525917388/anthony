@@ -22,4 +22,13 @@ public interface SysUserDao {
 	 * @return
 	 */
 	public int getUserTotal (Map<String,Object> map) ;
+	
+	
+	
+	/**
+	 * 登录
+	 * @param user
+	 * @return
+	 */
+	public SysUser login(SysUser user) ;
 }

@@ -15,4 +15,13 @@ public interface SysUserService {
 	 * @return
 	 */
 	public JqGridView<SysUser> getUsersAndCount(Search search) ;
+	
+	
+	
+	/**
+	 * 登录
+	 * @param user
+	 * @return
+	 */
+	public SysUser login(SysUser user) ;
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.emis.sys.entity.SysMenu;
+import com.emis.sys.entity.SysUser;
 import com.emis.util.JqGridView;
 import com.emis.util.SimpleUtil;
 
@@ -34,15 +35,16 @@ public class MenuAction extends SysSurperAction {
 	 */
 	@RequestMapping(value="left", method = { RequestMethod.POST, RequestMethod.GET})
 	public String left(HttpServletRequest request, HttpServletResponse response) {
+		SysUser user = (SysUser) request.getSession().getAttribute("SYS_USER") ;
+		
+		if(user == null){
+			return "error/noUser";
+		}
 
-		System.out.println("aa");
-		
-		int rid = 1 ;
-		
-		List<SysMenu> menuList = sysManageService.getMenus(0, rid) ;
+		List<SysMenu> menuList = sysManageService.getMenus(0, user.getId()) ;
 		
 		for(SysMenu menu : menuList){
-			List<SysMenu> mList = sysManageService.getMenus(menu.getId(), rid) ;
+			List<SysMenu> mList = sysManageService.getMenus(menu.getId(), user.getId()) ;
 			menu.setcMenus(mList);
 		}
 		
@@ -105,8 +107,8 @@ public class MenuAction extends SysSurperAction {
 		String order = request.getParameter("order") ;	
 		
 		SysMenu menu = new SysMenu() ;
-		if("add".equals(oper)){
-
+		if("edit".equals(oper)){
+			menu = sysManageService.getMenuEntity(SimpleUtil.toInteger(id)) ;
 			
 		}else{
 			

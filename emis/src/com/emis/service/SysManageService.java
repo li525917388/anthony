@@ -44,6 +44,15 @@ public interface SysManageService {
 	public int saveMenu(SysMenu menu) ;
 	
 	
+	
+	/**
+	 * 获得菜单实体
+	 * @param id
+	 * @return
+	 */
+	public SysMenu getMenuEntity(int id) ;
+	
+	
 	/**
 	 * 获得角色菜单
 	 * @param map

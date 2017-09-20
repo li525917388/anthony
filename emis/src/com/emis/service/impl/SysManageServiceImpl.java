@@ -93,7 +93,6 @@ public class SysManageServiceImpl implements SysManageService {
 	 */
 	@Override
 	public int getMenuTotal() {
-		// TODO Auto-generated method stub
 		return sysManageDao.getMenuTotal();
 	}
 
@@ -105,15 +104,21 @@ public class SysManageServiceImpl implements SysManageService {
 	 */
 	@Override
 	public int saveMenu(SysMenu menu) {
-		// TODO Auto-generated method stub
 		if(menu.getId() == 0){
 			return sysManageDao.addMenu(menu) ;
 		}else{
-			
+			return sysManageDao.updateMenu(menu) ;
 		}
-		return 0;
 	}
 
+	/*
+	 * 获得菜单实体
+	 * @see com.emis.service.SysManageService#getMenuEntity(int)
+	 */
+	@Override
+	public SysMenu getMenuEntity(int id) {
+		return sysManageDao.getMenuEntity(id);
+	}
 
 
 	@Override

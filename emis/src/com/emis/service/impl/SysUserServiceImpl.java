@@ -11,6 +11,7 @@ import com.emis.dao.SysUserDao;
 import com.emis.service.SysUserService;
 import com.emis.sys.entity.SysUser;
 import com.emis.util.JqGridView;
+import com.emis.util.MD5;
 import com.emis.util.Search;
 
 @Service
@@ -44,6 +45,29 @@ public class SysUserServiceImpl implements SysUserService {
 		gridView.setMaxResults(search.getRows());
 		
 		return gridView;
+	}
+
+	
+	/*
+	 * 登录
+	 * @see com.emis.service.SysUserService#login(com.emis.sys.entity.SysUser)
+	 */
+	@Override
+	public SysUser login(SysUser user) {
+		// TODO Auto-generated method stub
+		
+		SysUser sysUser = sysUserDao.login(user) ;
+		
+		MD5 md5 = new MD5();
+		
+		String pwd = md5.MD5Encode(user.getPwd());
+		
+		if(sysUser != null && sysUser.getPwd().equals(pwd)){
+			
+			return sysUser ;
+		}
+		
+		return null;
 	}
 	
 	

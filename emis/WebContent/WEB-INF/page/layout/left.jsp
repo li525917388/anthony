@@ -8,25 +8,24 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Insert title here</title>
 	
-<%-- 	<link rel="stylesheet" href="${contextPath }/static/jquery-ui-1.12.1.custom/jquery-ui.css"> --%>
+	<link href="${contextPath }/static/temp/css/bootstrap.css" rel="stylesheet">
 	<link href="${contextPath }/static/awesome/css/font-awesome.min.css" rel="stylesheet">
    	<link rel="stylesheet" href="${contextPath }/static/awesome/css/style.css" media="screen" type="text/css" />
    	
    	<script src='${contextPath }/static/awesome/js/jquery.js'></script>
   	<script src="${contextPath }/static/awesome/js/index.js"></script>
-<%-- 	<script type="text/javascript" src="${contextPath }/static/jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
-	<script type="text/javascript" src="${contextPath }/static/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-	 --%>
+
 	 <script>
  		 $(function() {
-   			var icons = {
+   			/* var icons = {
       			header: "ui-icon-circle-arrow-e",
       			activeHeader: "ui-icon-circle-arrow-s"
-    		};
-   		 	$( "#accordion" ).accordion({
+    		}; */
+   			
+   		 	/* $( "#accordion" ).accordion({
       			icons: icons,
       			heightStyle: "content"
-    		});
+    		}); */
 
   		});
   	</script>
@@ -56,7 +55,7 @@
 			<div class="link"><i class="fa ${ml.icon }"></i>${ml.mname }<i class="fa fa-chevron-down"></i></div>
 			<ul class="submenu">
 			<c:forEach items="${ml.cMenus }" var="cms">
-				<li><a onclick="toMenu('${cms.url }')" href="#">${cms.mname }</a></li>
+				<li><a onclick="toMenu('${cms.url }')" href="#">${cms.mname } <span class="badge">50</span></a></li>
 			</c:forEach>
 			</ul>
 		</li>
