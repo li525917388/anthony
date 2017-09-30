@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>登录</title>
+	<title>登录界面</title>
 	<script src='${contextPath}/assets/js/jquery-2.0.3.min.js'></script>
 </head>
 	<style type="text/css">
