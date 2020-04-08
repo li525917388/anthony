@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Implementation-Title: spring.batch
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Li Dehuan
+Implementation-Vendor-Id: com.ldh
+Build-Jdk: 1.8.0_181
+Implementation-URL: http://www.example.com
+Created-By: Maven Integration for Eclipse
+
